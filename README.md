@@ -43,7 +43,7 @@ You need to create a MySQL database instance.
 3.  Update the `src/main/resources/application.properties` file with your database credentials:
 
     ```properties
-	spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     spring.datasource.url=jdbc:mysql://localhost:3306/<YOUR_DB_NAME>
     spring.datasource.username=<YOUR_MYSQL_USERNAME>
     spring.datasource.password=<YOUR_MYSQL_PASSWORD>
@@ -86,6 +86,7 @@ The application will start on the default Spring Boot port (usually `8080`).
 The core source code is located under `src/main/java/com/leotechindia/quiz_app`. The structure will follow standard Spring Boot conventions:
 
   * `controller`: For RESTful API endpoints.
+    *  GET : ```/question/all``` (Retrieve All Questions)
   * `service`: For business logic.
   * `repository`: For database interaction (using Spring Data JPA).
   * `model` or `entity`: For database entities and data transfer objects (DTOs).
