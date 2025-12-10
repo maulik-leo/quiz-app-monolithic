@@ -3,8 +3,11 @@ package com.leotechindia.quiz_app.service;
 import com.leotechindia.quiz_app.dao.QuestionDao;
 import com.leotechindia.quiz_app.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,21 +17,41 @@ public class QuestionService {
     @Autowired
     private QuestionDao questionDao;
 
-    public List<Question> getAllQuestions() {
-        return questionDao.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        try {
+            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public Question getQuestionById(int searchId) {
-        Optional<Question> optQuestion = questionDao.findById(searchId);
-        return optQuestion.orElse(null);
+    public ResponseEntity<Question> getQuestionById(int searchId) {
+        try {
+            Optional<Question> optQuestion = questionDao.findById(searchId);
+            return new ResponseEntity<>(optQuestion.orElse(null), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new Question(), HttpStatus.BAD_REQUEST);
     }
 
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionDao.findByCategory(category);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        try {
+            return new ResponseEntity<>(questionDao.findByCategory(category), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    public String addQuestion(Question newQuestion) {
-        questionDao.save(newQuestion);
-        return "Added new Question in " + newQuestion.getCategory() + " category !";
+    public ResponseEntity<String> addQuestion(Question newQuestion) {
+        try {
+            questionDao.save(newQuestion);
+            return new ResponseEntity<>("Added new Question in " + newQuestion.getCategory() + " category !", HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST.getReasonPhrase(), HttpStatus.BAD_REQUEST);
     }
 }
