@@ -1,3 +1,6 @@
+
+-----
+
 ## 🚀 Quiz App by LeoTech India
 
 This repository contains the backend source code for the **Quiz App**, a robust and modern application designed for managing and delivering online quizzes.
@@ -24,9 +27,9 @@ Follow these steps to set up and run the application locally.
 
 #### Prerequisites
 
-  * Java Development Kit (JDK) 25
-  * Apache Maven
-  * MySQL 8.4 Server
+* Java Development Kit (JDK) 25
+* Apache Maven
+* MySQL 8.4 Server
 
 #### 1\. Database Setup
 
@@ -81,20 +84,34 @@ The application will start on the default Spring Boot port (usually `8080`).
 
 -----
 
+### 🌐 API Endpoints
+
+The Quiz App exposes the following RESTful endpoints for managing questions. The base URL for all endpoints is typically `http://localhost:8080`.
+
+| HTTP Method | Endpoint | Description | Request Body | Response Body |
+| :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/question/all` | Retrieves a list of all questions available in the database. | *None* | `List<Question>` |
+| `GET` | `/question/id/{search_id}` | Retrieves a single question based on its unique ID. | *None* | `Question` Object |
+| `GET` | `/question/cat/{search_category}` | Retrieves questions filtered by a specific category (e.g., JAVA, CSS). | *None* | `List<Question>` |
+| `POST` | `/question/add` | Creates and persists a new question in the database. | `Question` Object (JSON) | Success/Error Message |
+
+> **Note:** Endpoints for Quizzes (`/quiz/*`), updates, and deletes are **coming soon**.
+
+-----
+
 ### 📂 Project Structure
 
 The core source code is located under `src/main/java/com/leotechindia/quiz_app`. The structure will follow standard Spring Boot conventions:
 
-  * `controller`: For RESTful API endpoints.
-    *  GET : ```/question/all``` (Retrieve All Questions)
-  * `service`: For business logic.
-  * `repository`: For database interaction (using Spring Data JPA).
-  * `model` or `entity`: For database entities and data transfer objects (DTOs).
+* `controller`: For RESTful API endpoints. (See **API Endpoints** section above)
+* `service`: For business logic.
+* `repository`: For database interaction (using Spring Data JPA).
+* `model` or `entity`: For database entities and data transfer objects (DTOs).
 
 -----
 
 ### 📞 Contact
 
-For any issues or questions, please contact **LeoTech India** at [maulikspatel295@gmail.com].
+For any issues or questions, please contact **LeoTech India**.
 
 -----

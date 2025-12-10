@@ -3,9 +3,7 @@ package com.leotechindia.quiz_app.controller;
 import com.leotechindia.quiz_app.model.Question;
 import com.leotechindia.quiz_app.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,27 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+    // Search All available questions
     @GetMapping("all")
     public List<Question> getAllQuestions() {
         return questionService.getAllQuestions();
+    }
+
+    // Search question with specified ID
+    @GetMapping("id/{search_id}")
+    public Question getQuestionById(@PathVariable("search_id") int search_id) {
+        return questionService.getQuestionById(search_id);
+    }
+
+    // Search question with specified CATEGORY
+    @GetMapping("cat/{search_category}")
+    public List<Question> getQuestionsByCategory(@PathVariable("search_category") String category) {
+        return questionService.getQuestionsByCategory(category);
+    }
+
+    // Add question
+    @PostMapping("add")
+    public String addQuestion(@RequestBody Question newQuestion) {
+        return questionService.addQuestion(newQuestion);
     }
 }

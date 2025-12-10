@@ -4,9 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QuizAppByLeoTechIndiaApplication {
-
+public class QuizApplication {
     public static void main(String[] args) {
-        SpringApplication.run(QuizAppByLeoTechIndiaApplication.class, args);
+        SpringApplication.run(QuizApplication.class, args);
     }
 }
