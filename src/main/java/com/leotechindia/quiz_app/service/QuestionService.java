@@ -1,7 +1,7 @@
 package com.leotechindia.quiz_app.service;
 
 import com.leotechindia.quiz_app.dao.QuestionDao;
-import com.leotechindia.quiz_app.model.Question;
+import com.leotechindia.quiz_app.model.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

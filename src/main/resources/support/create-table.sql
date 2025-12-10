@@ -1,5 +1,5 @@
 CREATE TABLE question (
-    question_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     category varchar(255) NULL,
     difficulty_level varchar(255) NULL,
     option1 varchar(255) NULL,

@@ -88,12 +88,15 @@ The application will start on the default Spring Boot port (usually `8080`).
 
 The Quiz App exposes the following RESTful endpoints for managing questions. The base URL for all endpoints is typically `http://localhost:8080`.
 
-| HTTP Method | Endpoint | Description | Request Body | Response Body |
-| :--- | :--- | :--- | :--- | :--- |
-| `GET` | `/question/all` | Retrieves a list of all questions available in the database. | *None* | `List<Question>` |
-| `GET` | `/question/id/{search_id}` | Retrieves a single question based on its unique ID. | *None* | `Question` Object |
-| `GET` | `/question/cat/{search_category}` | Retrieves questions filtered by a specific category (e.g., JAVA, CSS). | *None* | `List<Question>` |
-| `POST` | `/question/add` | Creates and persists a new question in the database. | `Question` Object (JSON) | Success/Error Message |
+|  No.  | HTTP Method | Endpoint                          | Description | Request Body                            | Response Body                     |
+|:-----:|:------------|:----------------------------------| :--- |:----------------------------------------|:----------------------------------|
+| **1** | `GET`       | `/question/all`                   | Retrieves a list of all questions available in the database. | *None*                                  | `List<Question>`                  |
+| **2** | `GET`       | `/question/id/{search_id}`        | Retrieves a single question based on its unique ID. | *None*                                  | `Question` Object                 |
+| **3** | `GET`       | `/question/cat/{search_category}` | Retrieves questions filtered by a specific category (e.g., JAVA, CSS). | *None*                                  | `List<Question>`                  |
+| **4** | `POST`      | `/question/add`                   | Creates and persists a new question in the database. | `Question` Object (JSON)                | Success/Error Message             |
+| **5** | `POST`      | `/quiz/create`                    | **Creates a new quiz** using a specified category, number of questions, and a title. | JSON: `{category, numQuestions, title}` | Quiz ID or Success/Error Message  |
+| **6** | `GET`       | `/quiz/get/{quiz_id}`             | **Retrieves all questions** that belong to the specified quiz ID. | *None*                                  | `List<Question>`                  |
+| **7** | `POST`      | `/quiz/submit/{quiz_id}`          | **Submits user answers** for a quiz and returns the final score. | JSON:`List<Answers>`(User's answers)    | e.g.`Score : 3 / 5` (Final Score) |
 
 > **Note:** Endpoints for Quizzes (`/quiz/*`), updates, and deletes are **coming soon**.
 
