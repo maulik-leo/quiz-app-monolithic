@@ -1,7 +1,7 @@
 package com.leotechindia.quiz_app.controller;
 
-import com.leotechindia.quiz_app.model.wrapper.AnswerOnly;
-import com.leotechindia.quiz_app.model.wrapper.QuestionOnly;
+import com.leotechindia.quiz_app.model.dto.AnswerOnly;
+import com.leotechindia.quiz_app.model.dto.QuestionOnly;
 import com.leotechindia.quiz_app.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

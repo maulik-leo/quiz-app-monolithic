@@ -3,7 +3,7 @@
 
 ## 🚀 Quiz App by LeoTech India
 
-This repository contains the backend source code for the **Quiz App**, a robust and modern application designed for managing and delivering online quizzes.
+This repository contains the backend source code for the **Quiz App**, a monolithic, robust and modern application designed for managing and delivering online quizzes.
 
 -----
 
@@ -56,7 +56,7 @@ You need to create a MySQL database instance.
 
 #### 2\. Build the Application
 
-Navigate to the project root directory (`quiz-app`) and execute the following Maven command:
+Navigate to the project root directory (`quiz-app-monolithic`) and execute the following Maven command:
 
 ```bash
 mvn clean install
@@ -69,7 +69,7 @@ This command cleans the build directory, compiles the code, and packages the app
 You can run the application directly from the command line using the generated JAR file:
 
 ```bash
-java -jar target/quiz-app.jar
+java -jar target/quiz-app-monolithic-v1.0.0.jar
 ```
 
 *(The exact JAR file name might vary slightly based on the version.)*

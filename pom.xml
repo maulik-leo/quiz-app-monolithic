@@ -9,23 +9,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.leotechindia</groupId>
-    <artifactId>quiz-app</artifactId>
-    <version>0.1.0</version>
+    <artifactId>quiz-app-monolithic</artifactId>
+    <version>1.0.0</version>
     <name>Quiz App by LeoTech India</name>
-    <description>The Quiz App by LeoTech India is a modern, stand-alone web application built to deliver an interactive online quizzing experience. It utilizes the Spring Boot (3.5.8) framework to rapidly create a robust backend, running on Java 25. The application employs Spring Web for creating RESTful APIs and Spring Data JPA for managing persistent data storage efficiently in a MySQL 8.4 database. The use of Lombok significantly reduces boilerplate code, ensuring a clean and maintainable codebase.</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+    <description>The Quiz App by LeoTech India is a modern, stand-alone web application built to deliver an interactive
+        online quizzing experience. It utilizes the Spring Boot (3.5.8) framework to rapidly create a robust backend,
+        running on Java 25. The application employs Spring Web for creating RESTful APIs and Spring Data JPA for
+        managing persistent data storage efficiently in a MySQL 8.4 database. The use of Lombok significantly reduces
+        boilerplate code, ensuring a clean and maintainable codebase.
+    </description>
     <properties>
         <java.version>25</java.version>
     </properties>
@@ -38,7 +30,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -55,8 +46,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>${project.artifactId}-v${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
