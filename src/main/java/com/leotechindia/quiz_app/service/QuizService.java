@@ -1,56 +1,57 @@
 package com.leotechindia.quiz_app.service;
 
-import com.leotechindia.quiz_app.dao.QuestionDao;
-import com.leotechindia.quiz_app.dao.QuizDao;
-import com.leotechindia.quiz_app.model.entity.Question;
-import com.leotechindia.quiz_app.model.entity.Quiz;
-import com.leotechindia.quiz_app.model.dto.AnswerOnly;
-import com.leotechindia.quiz_app.model.dto.QuestionOnly;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.leotechindia.quiz_app.dao.QuestionDao;
+import com.leotechindia.quiz_app.dao.QuizDao;
+import com.leotechindia.quiz_app.model.dto.AnswerOnly;
+import com.leotechindia.quiz_app.model.dto.QuestionOnly;
+import com.leotechindia.quiz_app.model.entity.Question;
+import com.leotechindia.quiz_app.model.entity.Quiz;
 
 @Service
 public class QuizService {
 
-    @Autowired
-    QuizDao quizDao;
+	@Autowired
+	QuizDao quizDao;
 
-    @Autowired
-    QuestionDao questionDao;
+	@Autowired
+	QuestionDao questionDao;
 
-    public ResponseEntity<String> createQuiz(String category, int numOfQuestion, String quizTitle) {
-        Quiz quiz = new Quiz();
-        quiz.setQuizTitle(quizTitle);
-        quiz.setQuestions(questionDao.findRandomQuestionsByCategory(category, numOfQuestion));
-        quizDao.save(quiz);
-        return new ResponseEntity<>("Created quiz : " + quiz.getQuizTitle() + " (ID : " + quiz.getId() + ")", HttpStatus.CREATED);
-    }
+	public ResponseEntity<String> createQuiz(String category, int numOfQuestion, String quizTitle) {
+		Quiz quiz = new Quiz();
+		quiz.setQuizTitle(quizTitle);
+		quiz.setQuestions(questionDao.findRandomQuestionsByCategory(category, numOfQuestion));
+		quizDao.save(quiz);
+		return new ResponseEntity<>("Created quiz : " + quiz.getQuizTitle() + " (ID : " + quiz.getId() + ")", HttpStatus.CREATED);
+	}
 
-    public ResponseEntity<List<QuestionOnly>> getQuiz(int quizId) {
-        List<Question> questionsFromDB = quizDao.findById(quizId).get().getQuestions();
-        List<QuestionOnly> questionsForUser = new ArrayList<>(questionsFromDB.size());
-        for (Question q : questionsFromDB) {
-            questionsForUser.add(new QuestionOnly(q.getId(), q.getQuestionTitle(), q.getOption1(), q.getOption2(), q.getOption3(), q.getOption4()));
-        }
-        return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
-    }
+	public ResponseEntity<List<QuestionOnly>> getQuiz(int quizId) {
+		List<Question> questionsFromDB = quizDao.findById(quizId).get().getQuestions();
+		List<QuestionOnly> questionsForUser = new ArrayList<>(questionsFromDB.size());
+		for (Question q : questionsFromDB) {
+			questionsForUser.add(new QuestionOnly(q.getId(), q.getQuestionTitle(), q.getOption1(), q.getOption2(), q.getOption3(), q.getOption4()));
+		}
+		return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
+	}
 
-    public ResponseEntity<String> calculateQuizScore(int quizId, List<AnswerOnly> answers) {
-        List<Question> questionsOfQuiz = quizDao.findById(quizId).get().getQuestions();
+	public ResponseEntity<String> calculateQuizScore(int quizId, List<AnswerOnly> answers) {
+		List<Question> questionsOfQuiz = quizDao.findById(quizId).get().getQuestions();
 
-        // This is weak logic, as no guarantee of both list are in same order or not, suggested to implement comparison logic using map
-        int index = 0, correct = 0;
-        for (AnswerOnly ans : answers) {
-            if (questionsOfQuiz.get(index).getId() == ans.getQuestionId() && questionsOfQuiz.get(index).getRightAnswer().equals(ans.getAnswerByUser())) {
-                correct++;
-            }
-            index++;
-        }
-        return new ResponseEntity<>("Score : " + correct + " / " + questionsOfQuiz.size(), HttpStatus.OK);
-    }
+		// This is weak logic, as no guarantee of both list are in same order or not, suggested to implement comparison logic using map
+		int index = 0, correct = 0;
+		for (AnswerOnly ans : answers) {
+			if (questionsOfQuiz.get(index).getId() == ans.getQuestionId() && questionsOfQuiz.get(index).getRightAnswer().equals(ans.getAnswerByUser())) {
+				correct++;
+			}
+			index++;
+		}
+		return new ResponseEntity<>("Score : " + correct + " / " + questionsOfQuiz.size(), HttpStatus.OK);
+	}
 }
